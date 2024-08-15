@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Public } from '../decorators/isPublicDecorator';
 
@@ -33,14 +33,5 @@ export class AuthController {
       registerInfo.lastname,
       registerInfo.password,
     );
-  }
-
-  @Public()
-  @Post('cookie/login')
-  // @ts-expect-error not-detected-type
-  loginWithCookie(@Req() request) {
-    const userId = request.user?.userId;
-
-    return this.authService.cookieLogin(userId);
   }
 }

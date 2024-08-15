@@ -141,29 +141,4 @@ export class AuthService {
       throw new Error('Failed to sign token');
     }
   }
-
-  async cookieLogin(userId: string) {
-    const user: User | null = await User.findOne({
-      where: { userId: userId },
-    });
-
-    if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
-
-    const payload = {
-      userId: user.userId,
-    };
-
-    try {
-      const accessToken = await this.jwtService.signAsync(payload);
-      return {
-        access_token: accessToken,
-        userDto: userToUserDto(user),
-      };
-    } catch (error) {
-      console.error('Error signing token:', error);
-      throw new Error('Failed to sign token');
-    }
-  }
 }

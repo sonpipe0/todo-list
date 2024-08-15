@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { TodoService } from './todo.service';
+import { Request } from 'express';
 
 type TodoInfoType = {
+  userId: string;
   name: string;
   description: string;
   dueDate: Date;
@@ -30,5 +32,31 @@ export class TodoController {
     const userId = request.user?.userId;
 
     return this.todoService.getTodos(userId);
+  }
+
+  @Post('change-date')
+  changeDate(
+    @Body() todoInfo: { todoId: string; newDate: string },
+    @Req() request: Request,
+  ) {
+    // @ts-expect-error request-user-injection-not-detected
+    const userId = request.user?.userId;
+    const newDate = new Date(todoInfo.newDate);
+    return this.todoService.changeDate(todoInfo.todoId, userId, newDate);
+  }
+
+  @Post('mark-done')
+  markDone(@Body() info: { todoId: string }, @Req() request: Request) {
+    // @ts-expect-error request-user-injection-not-detected
+    const userId = request.user?.userId;
+
+    return this.todoService.changeTodoStatus(info.todoId, userId);
+  }
+
+  @Post('delete')
+  delete(@Body() info: { todoId: string }, @Req() request: Request) {
+    // @ts-expect-error request-user-injection-not-detected
+    const userId = request.user?.userId;
+    return this.todoService.deleteTodo(info.todoId, userId);
   }
 }

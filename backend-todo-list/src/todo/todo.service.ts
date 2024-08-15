@@ -51,6 +51,61 @@ export class TodoService {
 
   }
 
+  async changeDate(todoId: string, userId: string, newDate: Date) {
+    const todo: Todo | null = await Todo.findOne({
+      where: { todoId: todoId, userId: userId },
+    });
+
+    if (!todo) {
+      throw new HttpException('Todo not found', 404);
+    }
+
+    todo.dueDate = newDate;
+    await todo.save();
+    const result: TodoDTO = {
+      todoId: todo.todoId,
+      title: todo.title,
+      description: todo.description,
+      dueDate: todo.dueDate,
+      done: todo.done,
+    };
+    return result;
+  }
+
+  async changeTodoStatus(todoId: string, userId: string) {
+    const todo: Todo | null = await Todo.findOne({
+      where: { todoId: todoId, userId: userId },
+    });
+
+    if (!todo) {
+      throw new HttpException('Todo not found', 404);
+    }
+
+    todo.done = !todo.done;
+    await todo.save();
+    const result: TodoDTO = {
+      todoId: todo.todoId,
+      title: todo.title,
+      description: todo.description,
+      dueDate: todo.dueDate,
+      done: todo.done,
+    };
+    return result;
+  }
+
+  async deleteTodo(todoId: string, userId: string) {
+    const todo: Todo | null = await Todo.findOne({
+      where: { todoId: todoId, userId: userId },
+    });
+
+    if (!todo) {
+      throw new HttpException('Todo not found', 404);
+    }
+
+    await todo.destroy();
+    return 'Todo deleted';
+  }
+
   async getTodos(userId: string) {
     const todos: Todo[] = await Todo.findAll({
       where: { userId: userId },
