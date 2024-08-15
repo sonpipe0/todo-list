@@ -15,7 +15,7 @@ import { User } from '../users/users.model';
 export class Todo extends Model {
   @Column({
     type: DataType.UUID,
-    defaultValue: uuid(),
+    defaultValue: uuid,
     primaryKey: true,
     unique: true,
   })

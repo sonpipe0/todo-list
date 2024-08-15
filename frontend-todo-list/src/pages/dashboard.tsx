@@ -6,6 +6,8 @@ import TodoTable from "../components/Dashboard/TodoTable.tsx";
 import {Button, DateValue, Spinner} from "@nextui-org/react";
 import {IoAdd} from "react-icons/io5";
 import CreateTodoModal from "../components/Dashboard/CreateTodoModal.tsx";
+import {CiLogout} from "react-icons/ci";
+import ConfirmForm from "../components/Dashboard/Confirm Form.tsx";
 
 
 async function getTodos(axiosInstance: AxiosInstance): Promise<any[] | void> {
@@ -39,7 +41,7 @@ export default function Dashboard() {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
-
+    const [confirm, setConfirm] = useState<boolean>(false);
 
     useEffect(() => {
         getTodos(axiosInstance).then((todos) => {
@@ -132,7 +134,7 @@ export default function Dashboard() {
                             );
                         })}
                     </TodoTable>
-                    <h2 className="text-2xl py-4 text-myblack font-semibold font-lato">
+                    <h2 className="text-2xl self-center py-4 text-myblack font-semibold font-lato">
                         Done
                     </h2>
                     <TodoTable>
@@ -156,6 +158,11 @@ export default function Dashboard() {
                     <IoAdd size={30}/>
                     Add Todo
                 </Button>
+                <Button className={"transition fixed bottom-4 left-4 drop-shadow-2xl hover:py-6 hover:px-[1.15rem] hover:transition-all duration-150"} variant={"shadow"} color={"primary"} onClick={() => {setConfirm(true)}}>
+                    <CiLogout size={30}/>
+                    Logout
+                </Button>
+                {confirm && <ConfirmForm open={confirm} setOpen={setConfirm}/>}
                 {(open) && <CreateTodoModal open={open} setOpen={setOpen} setTodos={setTodos} todos={todos}/>}
             </div> : <div className="flex flex-col gap-20 justify-center items-center h-screen w-screen">
                 <Spinner size="lg" color="primary"/>

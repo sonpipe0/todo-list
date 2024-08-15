@@ -11,7 +11,7 @@ const calendarDateSchema = z.custom<CalendarDate>((data) => {
 
 export const TodoSchema: ZodType<FormDataCreateTodo> = z.object({
     name: z.string().min(3).max(20),
-    description: z.string().min(1).max(20),
+    description: z.string().min(1).max(100),
     dueDate: calendarDateSchema.refine(date => date.compare(today(getLocalTimeZone())) >= 0, {
         message: "Due date must be today or later."
     })

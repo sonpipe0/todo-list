@@ -47,7 +47,7 @@ export default function RegisterPage() {
             </h1>
             <form
     onSubmit={handleSubmit(onSubmit)}
-    className={"grid-rows-7 grid place-items-center h-full"}
+    className={"grid-rows-7 grid place-items-center h-[89vh]"}
     >
     <FormField
         top={"Username"}
