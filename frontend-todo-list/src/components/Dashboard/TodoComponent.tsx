@@ -49,7 +49,7 @@ export default function TodoComponent(props: TodoComponentProps) {
                 className="w-full flex flex-col p-4 justify-between gap-10 items-center bg-gray-100 cursor-pointer sm:flex sm:flex-row sm:gap-0 "
                 onClick={toggleDescription}
             >
-                <h1 className="text-2xl font-semibold text-gray-800">{todo.title}</h1>
+                <h1 className="text-2xl font-semibold text-gray-800 w-1/4">{todo.title}</h1>
                 <div className="flex  items-center space-x-2 sm: gap-10">
                     <DatePicker
                         label={"Due Date"}

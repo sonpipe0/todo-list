@@ -156,7 +156,7 @@ export default function Dashboard() {
                     <IoAdd size={30}/>
                     Add Todo
                 </Button>
-                {(open) && <CreateTodoModal open={open} setOpen={setOpen}/>}
+                {(open) && <CreateTodoModal open={open} setOpen={setOpen} setTodos={setTodos} todos={todos}/>}
             </div> : <div className="flex flex-col gap-20 justify-center items-center h-screen w-screen">
                 <Spinner size="lg" color="primary"/>
                 <Spinner size="lg" color="primary"/>

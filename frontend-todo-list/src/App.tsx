@@ -1,4 +1,3 @@
-import NoUserTutorial from "./pages/noUserTutorial.tsx";
 import './index.css'
 import {Route, Routes} from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute.tsx";
@@ -16,7 +15,6 @@ export default function App() {
                 <AuthProvider>
                     <AxiosProvider>
                         <Routes>
-                            <Route path={"/tutorial"} element={<NoUserTutorial/>}/>
                             <Route path={"/login"} element={<LoginPage/>}/>
                             <Route path={"/register"} element={<RegisterPage/>}/>
                             <Route path={"/"} element={<ProtectedRoute/>}>

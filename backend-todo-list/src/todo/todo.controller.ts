@@ -3,7 +3,6 @@ import { TodoService } from './todo.service';
 import { Request } from 'express';
 
 type TodoInfoType = {
-  userId: string;
   name: string;
   description: string;
   dueDate: Date;

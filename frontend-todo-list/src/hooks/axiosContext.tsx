@@ -1,7 +1,7 @@
 // context/AxiosContext.tsx
 import React, { createContext, ReactNode, useContext, useEffect } from "react";
 import axios, { AxiosInstance } from "axios";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "./useAuth.tsx";
 
 interface AxiosContextType {
 	axiosInstance: AxiosInstance;
