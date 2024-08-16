@@ -9,6 +9,7 @@ import { useAxios } from "../hooks/axiosContext.tsx";
 export default function RegisterPage() {
     const navigate = useNavigate();
     const axiosInstance = useAxios();
+    console.log("creando pr");
 
     const {
         register,
